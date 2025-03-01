@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'tienda/registro.css' %}">
+
+<main class="main_1">
+    <form method="post" action="{% url 'registro' %}">
+        {% csrf_token %}
+        <div>
+            <h2 class="registro">Registro</h2>
+
+            <div class="messages">
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: rgb(112, 111, 111);">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <input type="text" name="username" placeholder="Nombre del Usuario" required>
+            <input type="email" name="email" placeholder="Correo Electrónico" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required>
+            <button type="submit">Registrarse</button>
+            <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+
+        </div>
+    </form>
+</main>
+{% endblock %}

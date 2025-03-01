@@ -1,0 +1,95 @@
+.main_1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    padding: 20px;
+    flex-direction: column; /* Asegura que los elementos se apilen en columna */
+}
+
+
+/* Ajuste del contenedor principal */
+.profile-container {
+    background-color: #929292;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgb(255, 255, 255);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border: 2px solid #033468;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Asegura que el contenido dentro esté centrado */
+}
+
+
+/* Asegurar que la caja de usuario también esté centrada */
+.user-info {
+    background-color: #afb1ae;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    width: 100%;
+    max-width: 330px;
+    margin: 0 auto 20px auto; /* Centrar */
+}
+
+
+/* Ajustar la información del usuario */
+.user-info p {
+    font-size: 16px;
+    color: #000;
+    margin: 10px 0;
+}
+
+/* Espaciar mejor los botones */
+.actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center; /* Centra los botones */
+}
+
+.actions a {
+    display: block;
+    padding: 10px;
+    background-color: #033468;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+    width: 100%;
+    max-width: 330px;
+    text-align: center;
+    margin: 10px auto;
+}
+.actions a:hover {
+    background-color: #0063ce;
+}
+
+/* Diseño Responsivo */
+@media (max-width: 768px) {
+    .profile-container {
+        width: 90%;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    h2.perfil {
+        font-size: 20px;
+    }
+
+    .user-info {
+        max-width: 100%;
+    }
+}

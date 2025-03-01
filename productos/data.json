@@ -1,0 +1,103 @@
+[
+    {
+        "id": "camiseta-01",
+        "titulo": "camisa jordan off white",
+        "imagen": "./img/hombre/ch01.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 75000
+    },
+    {
+        "id": "camiseta-02",
+        "titulo": " camisa undeground ",
+        "imagen": "./img/hombre/ch02.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 75000
+    },
+    {
+        "id": "camiseta-03",
+        "titulo": "Camiseta  drew black",
+        "imagen": "./img/hombre/ch03.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 55000
+    },
+    {
+        "id": "camiseta-04",
+        "titulo": "Camiseta cinema  under",
+        "imagen": "./img/hombre/ch04.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 75000
+    },
+    {
+        "id": "camiseta-05",
+        "titulo": "Camiseta Amiri colection",
+        "imagen": "./img/hombre/ch05.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 65000
+    },
+    {
+        "id": "camiseta-06",
+        "titulo": "Camiseta polo dolce & gabbana",
+        "imagen": "./img/hombre/ch06.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 60000
+    },
+    {
+        "id": "camiseta-07",
+        "titulo": "Camiseta polo fendi",
+        "imagen": "./img/hombre/ch07.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 60000
+    },
+    {
+        "id": "camiseta-08",
+        "titulo": "Camiseta polo luis vitton ",
+        "imagen": "./img/hombre/ch08.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 60000
+    },
+    {
+        "id": "camiseta-09",
+        "titulo": "Camiseta basica estanpada",
+        "imagen": "./img/hombre/ch09.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 65000
+    },
+    {
+        "id": "camiseta-10",
+        "titulo": "Camiseta polo luis vitton N",
+        "imagen": "./img/hombre/ch10.jpeg",
+        "categoria": {
+            "nombre": "Camisetas H",
+            "id": "camisetash"
+        },
+        "precio": 60000
+    }
+
+]
