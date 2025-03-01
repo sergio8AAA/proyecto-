@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+        
+<link rel="stylesheet" href="{% static 'tienda/nosotros.css' %}">      
+        
+        <section class="section">
+                <article class="articulo">
+                    <div class="diseño">
+                        <h2>Mision</h2>
+                        <img src="{% static 'images/local.jpg' %}" alt="">
+                    </div>
+                    <p>Ofrecer moda accesible y de calidad, que permita a nuestros clientes expresar su estilo único con confianza y comodidad, brindando siempre un servicio excepcional y productos que se adaptan a las últimas tendencias</p>
+                </article>
+        
+        
+                <article class="articulo">
+                    <div class="diseño">
+                        <h2>Vision</h2>
+                        <img src="{% static 'images/local 2.jpg' %}" alt="">
+                    </div>
+                    <p>Ser la marca que inspira confianza y autenticidad, ofreciendo ropa que empodere a cada persona a expresar su verdadero yo. Queremos ser parte de su viaje, acompañándolos en cada momento, con prendas que se sientan como una extensión de su personalidad.</p>
+                </article>
+        </section>
+    
+    </header>
+    
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'tienda/inicio.css' %}">
+    <header class="header">      
+        <div class="header-content container">
+            <div class="header-txt">
+                <h1>Urban Style</h1>
+                <p>
+                    "Descubre las tendencias más frescas del streetwear en Urban Style. Encuentra desde básicos imprescindibles hasta piezas únicas que te harán destacar. ¡Explora nuestra nueva colección y eleva tu estilo al siguiente nivel!"
+                </p>
+                <a href="{% url 'nosotros' %}" class="btn-1">Información</a>
+
+            </div>
+            <div class="header-img">
+                <img src="{% static 'images/fotoindex1 (2).jpeg' %}" alt="">
+            </div>
+        </div>
+
+    </header>
+
+    
+
+{% endblock %}
+
+    
