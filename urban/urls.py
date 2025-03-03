@@ -45,12 +45,15 @@ urlpatterns = [
     path('perfil/', views.perfil, name='perfil'),
     path("accounts/login/", LoginView.as_view(template_name="login.html"), name="login"),
     path('perfil/', perfil, name='perfil'),
-    path('perfil/editar/', editar_perfil, name='editar_perfil'),
     path('manual/',views.manual, name='manual'),
     path('carrito/', views.ver_carrito, name='ver_carrito'),
     path('carrito/actualizar/<int:item_id>/', views.actualizar_carrito, name='actualizar_carrito'),
     path('carrito/eliminar/<int:item_id>/', views.eliminar_item, name='eliminar_item'),
     path('productos/', views.productos, name='productos'),
+    # path('perfil/editar/', editar_perfil, name='editar_perfil'),
+    path('resetear/', views.resetear, name='resetear'),
+    path('editar_perfil/<uidb64>/<token>/', views.editar_perfil, name="editar_perfil"),
+    path('confirmar/', views.confirmar, name='confirmar')
 
 
 

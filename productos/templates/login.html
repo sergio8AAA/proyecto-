@@ -22,6 +22,7 @@
                 <input type="text" name="username" placeholder="Usuario" required>
                 <input type="password" name="password" placeholder="Contraseña" required>
                 <button     type="submit">Ingresar</button>
+                <a href="{% url 'resetear' %}">olvido su Contraseña</a>
                 <p>¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a></p>
             </div>
     </form>  
