@@ -10,6 +10,10 @@ from django.contrib.auth import logout
 from .models import Producto
 from django.shortcuts import redirect
 from .models import CarritoItem
+from .models import Datos
+from django.core.mail import send_mail
+
+
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
@@ -215,5 +219,134 @@ def eliminar_item(request, item_id):
         messages.error(request, "Item no encontrado")
         
     return redirect('ver_carrito')
+
+
+#vista de pasarela de compras
+
+
+
+
+from .models import Orden, OrdenItem, CarritoItem 
+from .forms import OrdenForm
+
+
+def pasarela(request):
+    carrito_items = []
+    total = 0
+
+    # Obtener los productos del carrito según el usuario o sesión
+    if request.user.is_authenticated:
+        carrito_items = CarritoItem.objects.filter(usuario=request.user)
+    else:
+        if request.session.session_key:
+            carrito_items = CarritoItem.objects.filter(sesion_id=request.session.session_key)
+
+    # Si el carrito está vacío, mostrar advertencia
+    if not carrito_items:
+        messages.warning(request, "Tu carrito está vacío")
+        return redirect('ver_carrito')
+
+    # Calcular el total del pedido
+    for item in carrito_items:
+        total += item.subtotal()
+
+    if request.method == 'POST':
+        form = OrdenForm(request.POST)
+        metodo_pago = request.POST.get('metodo_pago')
+
+        if form.is_valid() and metodo_pago:
+            orden = form.save(commit=False)
+
+            if request.user.is_authenticated:
+                orden.usuario = request.user
+            else:
+                orden.sesion_id = request.session.session_key
+
+            orden.total = total
+            orden.metodo_pago = metodo_pago
+            orden.save()
+
+            # Guardar los productos en la orden
+            for item in carrito_items:
+                OrdenItem.objects.create(
+                    orden=orden,
+                    producto=item.producto,
+                    precio=item.producto.precio,
+                    cantidad=item.cantidad
+                )
+
+            # Vaciar el carrito después del pago
+            carrito_items.delete()
+
+            # 📧 Enviar el correo de confirmación
+            enviar_correo_confirmacion(orden)
+
+            messages.success(request, "Tu pedido ha sido procesado con éxito")
+            return redirect('confirmar', orden_id=orden.id)
+        else:
+            messages.error(request, "Por favor selecciona un método de pago válido.")
+    else:
+        # Precargar los datos del usuario en el formulario
+        initial_data = {}
+        if request.user.is_authenticated:
+            try:
+                datos = Datos.objects.get(usuario=request.user)
+                initial_data = {
+                    'nombre': f"{datos.nombre} {datos.apellido}",
+                    'email': request.user.email
+                }
+            except Datos.DoesNotExist:
+                initial_data = {
+                    'nombre': request.user.username,
+                    'email': request.user.email
+                }
+
+        form = OrdenForm(initial=initial_data)
+
+    return render(request, 'pasarela.html', {
+        'form': form,
+        'carrito_items': carrito_items,
+        'total': total
+    })
+
+
+def confirmacion(request, orden_id):
+    try:
+        if request.user.is_authenticated:
+            orden = Orden.objects.get(id=orden_id, usuario=request.user)
+        else:
+            orden = Orden.objects.get(id=orden_id, sesion_id=request.session.session_key)
+
+        items = OrdenItem.objects.filter(orden=orden)
+
+        return render(request, 'confirmacion.html', {
+            'orden': orden,
+            'items': items
+        })
+
+    except Orden.DoesNotExist:
+        messages.error(request, "Orden no encontrada")
+        return redirect('productos')
+
+
+def enviar_correo_confirmacion(orden):
+    """ Envía un correo de confirmación al cliente """
+    asunto = f"Confirmación de Pedido #{orden.id}"
+    mensaje = f"""
+    Hola {orden.nombre},
+
+    Gracias por tu compra. Hemos recibido tu pedido y estamos verificando el pago.
+
+    🛍 **Detalles del Pedido**
+    - Número de Pedido: {orden.id}
+    - Total: ${orden.total}
+    - Método de Pago: {orden.get_metodo_pago_display()}
+    - Fecha: {orden.fecha_creacion.strftime('%d/%m/%Y %H:%M')}
+
+    📦 **Productos Comprados**:
+    """
+
+    # A
+
 
 

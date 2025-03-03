@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     margin: 0;
@@ -135,7 +135,7 @@ p {
     height: 500px;
 }
 
-.footer {
+ .footer {
     padding: 50px 0 0 0;
     background-color: #C0C0C0;
     position: relative;
@@ -190,17 +190,43 @@ p {
     color: #0a0a0a;
     font-size: 16px;
     margin: 0;
+} 
+
+.footer{
+  padding: 30px 30px 0 30px;
+}
+
+.footer-links{
+  flex-direction: column;
+  text-align: center;
+}
+
+.link-img{
+  margin-bottom: 15px;
 }
 
 
 
+@media screen and (max-width:600px){
+  .header{
+      width: 100%;
+  }
+}
+.logo img{
+  border-radius: 80%;
+  width: 80px;
+  height: 80px;
 
-/* media del menu */
-@media(max-width:991px) {
+
+}  
+
+
+     @media(max-width:991px) {
     .menu {
         top: 0;
         padding: 30px;
     }
+                    
 
     .menu label {
         display: initial;
@@ -229,34 +255,6 @@ p {
     #menu:checked ~ .navbar {
         display: initial;
     }
-    
+     
+  }
 
-
-/* media del footer */
-.footer{
-    padding: 30px 30px 0 30px;
-}
-
-.footer-links{
-    flex-direction: column;
-    text-align: center;
-}
-
-.link-img{
-    margin-bottom: 15px;
-}
-
-}
-
-@media screen and (max-width:600px){
-    .header{
-        width: 100%;
-    }
-}
-.logo img{
-    border-radius: 80%;
-    width: 80px;
-    height: 80px;
-
-
-}

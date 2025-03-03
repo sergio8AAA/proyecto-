@@ -75,9 +75,11 @@
             <a href="{% url 'productos' %}" class="btn btn-secondary">
                 Continuar comprando
             </a>
-            <a href="#" class="btn btn-success">
-                Proceder al pago
+            <a href="{% url 'pasarela' %}" class="btn btn-success">
+                <button>comprar</button>
             </a>
+
+            
         </div>
     {% else %}
         <div class="carrito-vacio">
