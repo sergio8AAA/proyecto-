@@ -2,7 +2,9 @@ from django.contrib import admin
 from .models import(Producto)
 from django.contrib.admin.sites import AlreadyRegistered
 
+
 # Register your models here.
+
 
 class ProductoAdmin(admin.ModelAdmin):
     model = Producto
@@ -23,3 +25,7 @@ try:
     admin.site.register(CarritoItem, CarritoItemAdmin)
 except AlreadyRegistered:
     pass
+ 
+ 
+ 
+ 

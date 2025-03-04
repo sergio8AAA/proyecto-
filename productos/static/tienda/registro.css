@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #838383;
+    background-color: #a7c7ffbe;
     color: #333;
 }
 
@@ -17,7 +17,7 @@ main {
 }
 
 .main_1 {
-    background-color: #929292;
+    background-color: #ddedf3f9;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);

@@ -58,6 +58,10 @@
                             <a href="{% url 'eliminar_item' item.id %}" class="btn btn-danger btn-sm">
                                 Eliminar
                             </a>
+                            <a href="{% url 'pasarela' %}" class="btn btn-success">
+                                <button>comprar</button>
+                            </a>
+                         
                         </td>
                     </tr>
                     {% endfor %}
@@ -66,7 +70,10 @@
                     <tr>
                         <td colspan="3" class="carrito-total">Total:</td>
                         <td colspan="2" class="carrito-total">${{ total }}</td>
+                        
                     </tr>
+
+                    
                 </tfoot>
             </table>
         </div>

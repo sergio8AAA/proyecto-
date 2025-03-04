@@ -4,8 +4,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #838383;
-    color: #333;
+    background-color: #a7c7ffbe;
+    color: #bfe3fa;
 }
 
 main {
@@ -17,7 +17,7 @@ main {
 }
 
 .div {
-    background-color: #929292;
+    background-color: #cde5f7;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);

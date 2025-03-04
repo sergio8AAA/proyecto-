@@ -35,6 +35,11 @@
                 </ul>
             </nav>
 
+            <a href="{% url 'manual' %}" class="icono-manual">
+                <img src="{% static 'images/manu.png' %}" alt="Manual de usuario">
+            </a>
+            
+
             {% with total_items=request.user.carritoitem_set.count %}
                 {% if total_items > 0 %}
                     <a href="{% url 'ver_carrito' %}" class="icono-login">
@@ -54,7 +59,7 @@
                 <a href="{% url 'ver_carrito' %}" class="icono-login">
             
                 
-                <a href="{% url 'manual' %}"><img src="{% static 'images/manu.png' %}" alt=""></a>
+                
                 
                 <a href="{% url 'logout' %}">Cerrar Sesion</a>
             

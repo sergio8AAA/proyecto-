@@ -1,7 +1,4 @@
 
-
-
-
 .header-txt h1 {
     font-size: 140px;
     line-height: 150px;
@@ -28,12 +25,4 @@ p {
 
 .btn-1:hover {
     background-color: #83756e;
-}
-
-
-
-.header-img img {
-    width: 550px;
-    height: 500px;
-    border-radius: 70%;
 }

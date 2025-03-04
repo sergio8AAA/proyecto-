@@ -409,7 +409,7 @@ def enviar_correo_confirmacion(orden):
     📦 **Productos Comprados**:
     """
 
-    # A
+    
 
 
 
