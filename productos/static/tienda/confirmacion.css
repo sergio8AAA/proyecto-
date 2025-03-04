@@ -1,0 +1,96 @@
+/* Estilos generales */
+.confirmacion-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ícono de confirmación */
+.confirmacion-icon {
+    font-size: 50px;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+/* Títulos */
+.confirmacion-titulo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.resumen-titulo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #444;
+}
+
+/* Mensaje de confirmación */
+.confirmacion-mensaje {
+    font-size: 16px;
+    color: #666;
+    margin: 15px 0;
+}
+
+/* Detalles del pedido */
+.confirmacion-detalles {
+    text-align: left;
+    margin-top: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.confirmacion-datos div {
+    margin-bottom: 10px;
+}
+
+.datos-titulo {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Lista de productos */
+.confirmacion-items {
+    margin-top: 20px;
+}
+
+.confirmacion-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.confirmacion-total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745;
+    text-align: right;
+    margin-top: 10px;
+}
+
+/* Botón de continuar comprando */
+.confirmacion-acciones {
+    margin-top: 20px;
+}
+
+.btn-success {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
