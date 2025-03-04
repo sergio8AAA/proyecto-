@@ -2,15 +2,20 @@
 {% load static %}
 
 {% block content %}
-<main class="main_1">
-    <div class="profile-container">
-        <h2 class="perfil">Editar Perfil</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Guardar Cambios</button>
-        </form>
-        <a href="{% url 'perfil' %}">Cancelar</a>
-    </div>
-</main>
+
+
+
+
+<link rel="stylesheet" href="{% static 'tienda/editar_perfil.css' %}">    
+
+<div class="cont">
+    <h2>Ingresa tu nueva contraseña</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="password" name="password" placeholder="Nueva contraseña" required>
+        <button type="submit">Guardar</button>
+    </form>
+</div>
+
+
 {% endblock %}

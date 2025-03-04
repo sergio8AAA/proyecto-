@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 import json
 import os
 from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import send_mail
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode # type: ignore
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, logout
 from django.contrib.auth.decorators import login_required
@@ -66,8 +71,14 @@ def galeria(request):
     productos = Producto.objects.all()
     return render(request, 'galeria.html', {'productos': productos})
 
-def editar_perfil(request):
-    return render(request, 'editar_perfil.html')
+def editar_perfil(request, uidb64, token):
+    return render(request, 'editar_perfil.html', {'uidb64': uidb64, 'token': token})
+def confirmar(request):
+    return render(request, "confirmar.html")
+
+def resetear(request):
+    return render(request, "restablecer.html")
+
 
 
 
@@ -113,6 +124,58 @@ def registro(request):
             return redirect('login')  # Redirige a la página de login
 
     return render(request, 'registro.html')
+
+
+#vista de restablecer
+def resetear(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+        user = User.objects.filter(email=email).first()
+        if user:
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            enlace = request.build_absolute_uri(f"/editar_perfil/{uid}/{token}/")
+            send_mail(
+                "Restablecimiento de contraseña",
+                f"Haz clic en el siguiente enlace para cambiar tu contraseña: {enlace}",
+                "tu_correo@gmail.com",
+                [email],
+                fail_silently=False,
+            )
+            messages.success(request, "Se ha enviado un enlace de restablecimiento a su correo.")
+            return redirect("login")
+        else:
+            messages.error(request, "No se encontró un usuario con ese correo electrónico.")
+            return redirect("resetear")  # Redirige de nuevo a la página de reseteo
+    
+    return render(request, "resetear.html")
+
+#vista de editar_perfil (cambiar contraseña)
+def editar_perfil(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user and default_token_generator.check_token(user, token):
+        if request.method == "POST":
+            nueva_contraseña = request.POST["password"]
+            user.set_password(nueva_contraseña)
+            user.save()
+            return redirect("confirmar")
+
+        return render(request, "editar_perfil.html")  # Página para cambiar contraseña
+
+    return redirect("login")  # Si el enlace es inválido, redirige al login
+
+#vista para que funcione editar perfil
+def perfil(request):
+    usuario = request.user
+    uidb64 = urlsafe_base64_encode(force_bytes(usuario.pk))
+    token = default_token_generator.make_token(usuario)
+
+    return render(request, "perfil.html", {"usuario_uid": uidb64, "usuario_token": token})
 
 # Vista de cierre de sesión (logout)
 def logout_view(request):

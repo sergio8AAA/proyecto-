@@ -9,11 +9,13 @@
     <div class="profile-container">
         <h2 class="perfil">Perfil de Usuario</h2>
         <div class="user-info">
-            <p><strong>Nombre de Usuario:</strong> <span class="user-data">vegeta</span></p>
-            <p><strong>Correo Electrónico:</strong> <span class="user-data">vegeta@gmail.com</span></p>
+            <p><strong>Nombre de Usuario:</strong> <span class="user-data"></span></p>
+            <p><strong>Correo Electrónico:</strong> <span class="user-data"></span></p>
         </div>
         <div class="actions">
-            <a href="{% url 'editar_perfil' %}">Editar Perfil</a>
+            <a href="{% url 'editar_perfil' uidb64=usuario_uid token=usuario_token %}">Cambiar contraseña</a>
+            
+            
             <a href="{% url 'logout' %}">Cerrar sesión</a>
         </div>
     </div>
