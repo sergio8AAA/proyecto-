@@ -2,29 +2,49 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'tienda/nosotros.css' %}">
+
+</head>
+<body>
+    <header>
+        <h1>Urban Style</h1>
         
-<link rel="stylesheet" href="{% static 'tienda/nosotros.css' %}">      
-        
-        <section class="section">
-                <article class="articulo">
-                    <div class="diseño">
-                        <h2>Mision</h2>
-                        <img src="{% static 'images/local.jpg' %}" alt="">
-                    </div>
-                    <p>Ofrecer moda accesible y de calidad, que permita a nuestros clientes expresar su estilo único con confianza y comodidad, brindando siempre un servicio excepcional y productos que se adaptan a las últimas tendencias</p>
-                </article>
-        
-        
-                <article class="articulo">
-                    <div class="diseño">
-                        <h2>Vision</h2>
-                        <img src="{% static 'images/local 2.jpg' %}" alt="">
-                    </div>
-                    <p>Ser la marca que inspira confianza y autenticidad, ofreciendo ropa que empodere a cada persona a expresar su verdadero yo. Queremos ser parte de su viaje, acompañándolos en cada momento, con prendas que se sientan como una extensión de su personalidad.</p>
-                </article>
-        </section>
-    
     </header>
+    <h2>Lo mejor en tendencia y calidaden moda</h2>
+
+    <section class="mision-vision">
+        <div class="mision">
+            <h2>Misión</h2>
+            <img src="{% static 'images/logoyei8a.jpeg' %}" alt="">
+            <p>Ofrecer ropa con estilo único, sostenible y accesible, inspirando confianza y autenticidad en cada cliente.</p>
+        </div>
+        <div class="vision">
+            <h2>Visión</h2>
+            <img src="{% static 'images/logoyei8a.jpeg' %}" alt="">
+            <p>Convertirnos en la marca de moda urbana líder en innovación y sostenibilidad, marcando tendencia a nivel mundial.</p>
+        </div>
+    </section>
+
+
+    <section class="quienes-somos">
+        <div class="container">
+            <h2>Quiénes Somos</h2>
+            <p>
+                En <strong>Urban Style</strong>, creemos que la moda es una forma de expresión. 
+                 Hemos estado ofreciendo ropa urbana de calidad, combinando comodidad y 
+                tendencia para que siempre luzcas increíble. Nuestra misión es brindarte prendas exclusivas 
+                que reflejen tu personalidad y te hagan destacar en cualquier ocasión.
+            </p>
+            
+            
+            
+        </div>
+    </section>
+
+
     
 
+ 
+</body>
+</html
 {% endblock %}
