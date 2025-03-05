@@ -18,6 +18,8 @@ urlpatterns = [
     path('base/', views.base, name='base'),
     path('nosotros/', views.nosotros, name='nosotros'),
     path('mapanoti/', views.mapanoti, name='mapanoti'),
+    path('contactenos/', views.contactenos, name='contactenos'),
+
 
     # Autenticación
     path('login/', views.login_view, name='login'),

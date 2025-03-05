@@ -30,6 +30,9 @@ def index(request):
 def perfil(request):
     return render(request, 'perfil.html')
 
+def contactenos(request):
+    return render(request, 'contactenos.html')
+
 
 def editar_perfil(request):
     if request.method == "POST":
