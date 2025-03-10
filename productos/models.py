@@ -3,14 +3,22 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Producto(models.Model):
+    CATEGORIAS = [
+        ('Hombre', 'Hombre'),
+        ('Mujer', 'Mujer'),
+    ]
+
     nombre = models.CharField(max_length=200)
     descripcion = models.TextField()
     precio = models.DecimalField(max_digits=10, decimal_places=0)
     foto = models.ImageField(upload_to='productos/')
     fecha_creacion = models.DateField(auto_now_add=True)
+    categoria = models.CharField(max_length=10, choices=CATEGORIAS, default='Hombre')  # 👈 Campo de categoría
 
-    def _str_(self):
+    def __str__(self):  # 👈 Corrige el método __str__
         return self.nombre
+    
+    
     
 class CarritoItem(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)

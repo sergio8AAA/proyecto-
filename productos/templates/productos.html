@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}Productos{% endblock %}
+
 {% block content %}
 <style>
     .card-img-top {
@@ -8,12 +9,14 @@
     }
 
     .card:hover .card-img-top {
-        transform: scale(1.3); /* Se expande más */
+        transform: scale(1.3);
     }
-    
+
+    /* Quitar subrayado de los enlaces del footer */
+    footer a {
+        text-decoration: none !important;
+    }
 </style>
-
-
 
 {% load static %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -26,9 +29,19 @@
         </div>
         {% endfor %}
     </div>
-    {% endif %}
+{% endif %}
+
 <div class="container mt-5 mb-5">
     <h1 class="text-center mb-4">Nuestros Productos</h1>
+
+    <!-- Botones de filtro dinámico -->
+    <div class="text-center mb-4">
+        <a href="?categoria=Hombre" class="btn btn-primary">Hombre</a>
+        <a href="?categoria=Mujer" class="btn btn-danger">Mujer</a>
+        <a href="{% url 'productos' %}" class="btn btn-secondary">Todos</a>
+    </div>
+
+    <!-- Sección de productos dinámicos -->
     <div class="row g-4 justify-content-center">
         {% for producto in productos %}
         <div class="col-lg-3 col-md-4 col-sm-6"> 
@@ -36,19 +49,21 @@
                 <img src="{{ producto.foto.url }}" class="card-img-top p-3" alt="{{ producto.nombre }}"
                     style="height: 230px; object-fit: contain; background-color: #f8f9fa;">
                 <div class="card-body text-center">
-                    <h5 class="card-title" style="color: var(--primario-oscuro);">{{ producto.nombre }}</h5>
-                    <p class="card-text small" style="color: var(--texto-oscuro);">{{ producto.descripcion }}</p>
-                    <p class="fw-bold" style="color: var(--acento-oscuro);">${{ producto.precio }}</p>
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text small">{{ producto.descripcion }}</p>
+                    <p class="fw-bold">${{ producto.precio }}</p>
                     <form method="POST" action="{% url 'productos' %}">
                         {% csrf_token %}
                         <input type="hidden" name="producto_id" value="{{ producto.id }}">
-                        <button type="submit" class="btn w-100 btn-success" style="background-color: var(--acento); color: var(--texto-claro);">
+                        <button type="submit" class="btn w-100 btn-success">
                             Agregar al carrito
                         </button>
                     </form>
                 </div>
             </div>
         </div>
+        {% empty %}
+        <p class="text-center">No hay productos disponibles.</p>
         {% endfor %}
     </div>
 </div>

@@ -16,66 +16,75 @@
     <header class="header">
 
         <div class="menu container">
-
-            <a href="{% url 'index' %}" class="logo">
-                <img src="{% static 'images/logoyei8a.jpeg' %}" alt="Logo"></a>
-
-            <input type="checkbox" id="menu" />
-            <label for="menu">
-                <img src="{% static 'images/menu.svg' %}" class="menu-icono" alt="">
-            </label>
-            <nav class="navbar">
-                <ul>
-                    {% if not user.is_authenticated %}
-                        <li><a href="{% url 'index' %}">Inicio</a></li>
-                    {% endif %} 
-                    <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
-                    <li><a href="{% url 'mapanoti' %}">Ubicación</a></li>
-                    <li><a href="{% url 'contactenos' %}">contactenos</a></li>
-                    <li><a href="{% url 'productos' %}">productos</a></li>
-                </ul>
-            </nav>
-
-            <a href="{% url 'manual' %}" class="icono-manual">
-                <img src="{% static 'images/manu.png' %}" alt="Manual de usuario">
-            </a>
-            
-
-            {% with total_items=request.user.carritoitem_set.count %}
-                {% if total_items > 0 %}
-                    <a href="{% url 'ver_carrito' %}" class="icono-login">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span class="badge bg-danger">{{ total_items }}</span>
-                    </a>
-                {% endif %}
-            {% endwith %}
-
-
-            <!-- logos(perrfil, carrito, cerrar sesion) -->
-        {% if user.is_authenticated %}
-            <div class="socials-1">
-                <a href="{% url 'perfil' %}"><img src="{% static 'images/login.png' %}" alt=""></a>
-                
-                
-                <a href="{% url 'ver_carrito' %}" class="icono-login">
-            
-                
-                
-                
-                <a href="{% url 'logout' %}">Cerrar Sesion</a>
-            
+            <div class="log">
+                <a href="{% url 'index' %}" class="logo">
+                    <img src="{% static 'images/logoyei8a.jpeg' %}" alt="Logo"></a>
             </div>
-        {% endif %} 
+            <div class="todo">
+                <div class="men">
+                    <input type="checkbox" id="menu" />
+                    <label for="menu">
+                        <img src="{% static 'images/menu.svg' %}" class="menu-icono" alt="">
+                    </label>
+                    
+                    <nav class="navbar">
+                        <ul>
+                            {% if not user.is_authenticated %}
+                                <li><a href="{% url 'index' %}">Inicio</a></li>
+                            {% endif %} 
+                            <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+                            <li><a href="{% url 'mapanoti' %}">Ubicación</a></li>
+                            <li><a href="{% url 'contactenos' %}">contactenos</a></li>
+                            <li><a href="{% url 'productos' %}">productos</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="iconos">
+                <a href="{% url 'manual' %}" class="icono-manual">
+                    <img src="{% static 'images/manu.png' %}" alt="Manual de usuario">
+                </a>
+
+                {% with total_items=request.user.carritoitem_set.count %}
+                    {% if total_items > 0 %}
+                        <a href="{% url 'ver_carrito' %}" class="icono-login">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="badge bg-danger">{{ total_items }}</span>
+                        </a>
+                    {% endif %}
+                {% endwith %}
+
+
+                <!-- logos(perrfil, carrito, cerrar sesion) -->
+                <div class="icon">
+                {% if user.is_authenticated %}
+                    <div class="socials-1">
+                        <a href="{% url 'perfil' %}"><img src="{% static 'images/login.png' %}" alt=""></a>
+                        
+                        
+                        <a href="{% url 'ver_carrito' %}" class="icono-login">
+                    
+                        
+                        
+                        <a href="{% url 'logout' %}"><img src="{% static 'images/cerrar-sesion.png' %}" alt=""></a>
+                        
+                        <!-- <a href="{% url 'logout' %}"><img src="{% static 'images/login.png' %}" alt="">Cerrar Sesion</a> -->
+                    
+                    </div>
+                </div>
+            </div>
+            {% endif %} 
         </div>
 
     </header>
         <!-- Contenido principal del Header -->
-        <main>
-            {% block content %}
-        <!-- Ejemplo de contenido de la página -->
-        
-            {% endblock %}
-         </main>
+    <main>
+        {% block content %}
+    <!-- Ejemplo de contenido de la página -->
+    
+        {% endblock %}
+    </main>
     
      
      
@@ -84,7 +93,7 @@
     <!-- Inicio del Footer (Pie de página) -->
     <footer class="footer">
 
-        <div class="container"> 
+        <div class="containerf"> 
 
              <div class="footer-links">
 

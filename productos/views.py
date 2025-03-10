@@ -192,8 +192,28 @@ def logout_view(request):
 
 from .models import Producto, CarritoItem
 def productos(request):
+    categoria = request.GET.get('categoria', 'todos')  # Capturar categoría
+    talla = request.GET.get('talla', None)  # Capturar talla (si se envía)
+    color = request.GET.get('color', None)  # Capturar color (si se envía)
+
     producto_lista = Producto.objects.all()
 
+    # Filtrar por categoría si es diferente de 'todos'
+    if categoria and categoria != 'todos':
+        if categoria.lower() == 'hombre':
+            producto_lista = producto_lista.filter(categoria='Hombre')
+        elif categoria.lower() == 'mujer':
+            producto_lista = producto_lista.filter(categoria='Mujer')
+
+    # Filtrar por talla si está en la URL
+    if talla:
+        producto_lista = producto_lista.filter(talla=talla)
+
+    # Filtrar por color si está en la URL
+    if color:
+        producto_lista = producto_lista.filter(color=color)
+
+    # Manejo de agregar productos al carrito
     if request.method == "POST" and 'producto_id' in request.POST:
         producto_id = request.POST.get('producto_id')
         try:
@@ -209,26 +229,25 @@ def productos(request):
                     sesion_id=sesion_id,
                     usuario=None
                 )
-                
-                if not created:
-                    carrito_item.cantidad += 1
-                    carrito_item.save()
             else:
                 carrito_item, created = CarritoItem.objects.get_or_create(
                     producto=producto,
                     usuario=request.user,
                     sesion_id=None
                 )
-                
-                if not created:
-                    carrito_item.cantidad += 1
-                    carrito_item.save()
+            
+            if not created:
+                carrito_item.cantidad += 1
+                carrito_item.save()
             
             messages.success(request, f"{producto.nombre} añadido al carrito")
         except Producto.DoesNotExist:
             messages.error(request, "Producto no encontrado")
-    
-    return render(request, 'productos.html', {'productos': producto_lista})
+
+    return render(request, 'productos.html', {
+        'productos': producto_lista
+    })
+
 
 def ver_carrito(request):
     carrito_items = []

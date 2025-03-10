@@ -1,10 +1,12 @@
 from django.contrib import admin
 from .models import(Producto)
 from django.contrib.admin.sites import AlreadyRegistered
+from django.contrib.auth.admin import UserAdmin
 
 
 # Register your models here.
-
+class Useradmin(UserAdmin):
+    search_fields = ('username', 'email')
 
 class ProductoAdmin(admin.ModelAdmin):
     model = Producto
