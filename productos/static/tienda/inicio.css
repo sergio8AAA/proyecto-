@@ -1,0 +1,29 @@
+.ini{
+    background-color: #eeeeee;
+}
+.header-txt h1 {
+    font-size: 140px;
+    line-height: 150px;
+    color: #000000;
+    margin-bottom: 25px;
+    -webkit-text-stroke: #466eaa .1px;
+}
+
+p {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 35px;
+}
+.btn-1 {
+    display: inline-block;
+    padding: 13px 30px;
+    background-color: #C0C0C0;
+    color: #191b1b;
+    border-radius: 25px;
+    font-size: 18px;
+    border: solid #466eaa 3px;
+}
+
+.btn-1:hover {
+    background-color: #83756e;
+}

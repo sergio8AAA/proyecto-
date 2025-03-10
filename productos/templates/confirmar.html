@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'tienda/confirmar.css' %}">    
+
+<div class="cont">
+    <h2 class="titulo">Tu contraseña ha sido cambiada con éxito</h2>
+    <a class="lin" href="{% url 'login' %}">Volver al login</a>
+</div>
+
+{% endblock %}

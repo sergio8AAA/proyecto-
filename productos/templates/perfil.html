@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'tienda/perfil.css' %}">
+
+<main class="main_1">
+    <div class="profile-container">
+        <h2 class="perfil">Perfil de Usuario</h2>
+        <div class="user-info">
+            <p><strong>Nombre de Usuario: </strong> <span class="user-data">{{user.username}}</span></p>
+            <p><strong>Correo Electrónico:</strong> <span class="user-data">{{user.email}}</span></p>
+        </div>
+        <div class="actions">
+            <a href="{% url 'editar_perfil' uidb64=usuario_uid token=usuario_token %}">Cambiar contraseña</a>
+            
+            
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
