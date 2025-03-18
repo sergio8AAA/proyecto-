@@ -1,101 +1,112 @@
-{% extends 'base.html' %} 
-{% load static %} 
- 
-{% block title %}Finalizar Compra{% endblock %} 
- 
-{% block content %} 
-<link rel="stylesheet" href="{% static 'tienda/pasarela.css' %}">  
-<div class="checkout-container"> 
-    <h1 class="checkout-titulo">Finalizar Compra</h1>      
-    {% if messages %} 
-    <div class="messages"> 
-        {% for message in messages %} 
-        <div class="alert alert-{{ message.tags }}"> 
-            {{ message }} 
-        </div> 
-        {% endfor %} 
-    </div> 
+{% extends 'base.html' %}
+{% load static %}
 
-    {% endif %} 
-     
-    <div class="checkout-grid"> 
-        <div class="checkout-form"> 
-            <h2 class="resumen-titulo">Datos de Contacto</h2> 
-            <form method="POST"> 
-                {% csrf_token %} 
-                 
-                <div class="form-group"> 
-                    <label for="{{ form.nombre.id_for_label }}">Nombre 
-Completo</label> 
-                    {{ form.nombre }} 
-                    {% if form.nombre.errors %} 
-                    <div class="form-error">{{ form.nombre.errors }}</div> 
-                    {% endif %} 
-                </div> 
-                 
-                <div class="form-group"> 
-                    <label for="{{ form.email.id_for_label }}">Correo 
-Electrónico</label> 
-                    {{ form.email }} 
-                    {% if form.email.errors %} 
-                    <div class="form-error">{{ form.email.errors }}</div> 
-                    {% endif %} 
-                </div> 
-                 
-                <div class="form-group"> 
-                    <label for="{{ form.telefono.id_for_label }}">Teléfono</label> 
-                    {{ form.telefono }} 
-                    {% if form.telefono.errors %} 
-                    <div class="form-error">{{ form.telefono.errors }}</div> 
-                    {% endif %} 
-                </div> 
- 
-                <!-- Método de Pago --> 
-                <h2 class="resumen-titulo">Método de Pago</h2> 
-                <div class="form-group"> 
-                    {% for radio in form.metodo_pago %} 
-                        <div class="form-check"> 
-                            {{ radio.tag }} {{ radio.choice_label }} 
-                        </div> 
-                    {% endfor %} 
-                    {% if form.metodo_pago.errors %} 
-                    <div class="form-error">{{ form.metodo_pago.errors }}</div> 
-                    {% endif %} 
-                </div> 
- 
-                <button type="submit" class="btn btn-success"> 
-                    Confirmar Pedido 
-                </button> 
-            </form> 
-        </div> 
-         
-        <div class="checkout-resumen"> 
-            <h2 class="resumen-titulo">Resumen del Pedido</h2> 
-             
-            {% for item in carrito_items %} 
-            <div class="resumen-item"> 
-                <div class="resumen-producto"> 
-                    <img src="{{ item.producto.foto.url }}" alt="{{ item.producto.nombre }}" class="resumen-imagen"> 
-                    <div> 
-                        <div>{{ item.producto.nombre }}</div> 
-                        <div>Cantidad: {{ item.cantidad }}</div> 
-                    </div> 
-                </div> 
-                <div>${{ item.subtotal }}</div> 
-            </div> 
-            {% endfor %} 
-             
-            <div class="resumen-total"> 
-                Total: ${{ total }} 
-            </div> 
-             
-            <div style="margin-top: 2rem;"> 
-                <a href="{% url 'ver_carrito' %}" class="btn btn-outline"> 
-                    Volver al Carrito 
-                </a> 
-            </div> 
-        </div> 
-    </div> 
-</div> 
-{% endblock %} 
- 
+{% block title %}Finalizar Compra{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'tienda/pasarela.css' %}">
+
+<div class="checkout-container">
+    <h1 class="checkout-titulo">Finalizar Compra</h1>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="checkout-grid">
+        <div class="checkout-form">
+            <h2 class="resumen-titulo">Datos de Contacto</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="{{ form.nombre.id_for_label }}">Nombre Completo</label>
+                    {{ form.nombre }}
+                    {% if form.nombre.errors %}
+                    <div class="form-error">{{ form.nombre.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Correo Electrónico</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                    <div class="form-error">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.telefono.id_for_label }}">Teléfono</label>
+                    {{ form.telefono }}
+                    {% if form.telefono.errors %}
+                    <div class="form-error">{{ form.telefono.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Método de Pago -->
+                <h2 class="resumen-titulo">Método de Pago</h2>
+                <div class="form-group">
+                    {% for radio in form.metodo_pago %}
+                        <div class="form-check">
+                            <input type="radio" name="metodo_pago" value="{{ radio.choice_label }}" id="pago-{{ radio.choice_label }}" onclick="mostrarPago('{{ radio.choice_label }}')">
+                            <label for="pago-{{ radio.choice_label }}">{{ radio.choice_label }}</label>
+                        </div>
+                    {% endfor %}
+                    {% if form.metodo_pago.errors %}
+                    <div class="form-error">{{ form.metodo_pago.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Contenedor del Código QR y Comprobante -->
+                <div id="pago-info" style="display: none; text-align: center; margin-top: 20px;">
+                    <img id="qr-image" src="" alt="Código QR" style="width: 200px; display: block; margin: auto;">
+                    <p id="numero-pago"></p>
+                    <label for="comprobante">📥 Ingresar el comprobante de pago 📥</label>
+                    <input type="file" id="comprobante" name="comprobante">
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Confirmar Pedido
+                </button>
+            </form>
+        </div>
+
+        <div class="checkout-resumen">
+            <h2 class="resumen-titulo">Resumen del Pedido</h2>
+
+            {% for item in carrito_items %}
+            <div class="resumen-item">
+                <div class="resumen-producto">
+                    <img src="{{ item.producto.foto.url }}" alt="{{ item.producto.nombre }}" class="resumen-imagen">
+                    <div>
+                        <div>{{ item.producto.nombre }}</div>
+                        <div>Cantidad: {{ item.cantidad }}</div>
+                    </div>
+                </div>
+                <div>${{ item.subtotal }}</div>
+            </div>
+            {% endfor %}
+
+            <div class="resumen-total">
+                Total: ${{ total }}
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <a href="{% url 'ver_carrito' %}" class="btn btn-outline">
+                    Volver al Carrito
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static 'js/pasarela.js' %}"></script>
+
+{% endblock %}
